@@ -1,0 +1,1516 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistem Sepeda PSI - Politeknik Semen Indonesia</title>
+    <style>
+        /* Global styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            color: #333;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Navigation Menu styles */
+        .navbar {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(15px);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            padding: 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 20px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            font-size: 1.5em;
+            font-weight: bold;
+            color: #2c3e50;
+        }
+
+      .logo span {
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+    -webkit-text-fill-color: transparent;
+    margin-left: 10px;
+    display: inline-block; /* penting untuk memastikan efek bekerja */
+}
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+        }
+
+        .nav-menu li {
+            position: relative;
+        }
+
+        .nav-menu a {
+            text-decoration: none;
+            color: #555;
+            font-weight: 500;
+            padding: 10px 15px;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .nav-menu a:hover,
+        .nav-menu a.active {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            padding: 5px;
+        }
+
+        .hamburger span {
+            width: 25px;
+            height: 3px;
+            background: #555;
+            margin: 3px 0;
+            transition: 0.3s;
+            border-radius: 2px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            flex: 1;
+        }
+
+        /* Homepage Styles */
+        .hero-section {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 60px 40px;
+            margin-bottom: 30px;
+            text-align: center;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(10px);
+        }
+
+      .hero-title {
+    font-size: 3.5em;
+    font-weight: bold;
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 20px;
+}
+
+
+        .hero-subtitle {
+            font-size: 1.3em;
+            color: #666;
+            margin-bottom: 30px;
+            line-height: 1.6;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .hero-btn {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .hero-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
+        }
+
+        .hero-btn.secondary {
+            background: linear-gradient(135deg, #4ecdc4, #44a08d);
+        }
+
+        /* Features Section styles */
+        .features-section {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 40px;
+            margin-bottom: 30px;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        }
+
+        .features-title {
+            text-align: center;
+            font-size: 2.5em;
+            margin-bottom: 40px;
+            color: #2c3e50;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .feature-card {
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.1), rgba(118, 75, 162, 0.1));
+            padding: 30px;
+            border-radius: 15px;
+            text-align: center;
+            transition: transform 0.3s ease;
+            border: 2px solid transparent;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(102, 126, 234, 0.3);
+        }
+
+        .feature-icon {
+            font-size: 3em;
+            margin-bottom: 20px;
+        }
+
+        .feature-title {
+            font-size: 1.3em;
+            font-weight: bold;
+            margin-bottom: 15px;
+            color: #2c3e50;
+        }
+
+        .feature-description {
+            color: #666;
+            line-height: 1.6;
+        }
+
+        /* System Interface Styles */
+        .header {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(10px);
+            text-align: center;
+        }
+
+        .header h1 {
+            color: #2c3e50;
+            margin-bottom: 10px;
+            font-size: 2.5em;
+        }
+
+        .header p {
+            color: #7f8c8d;
+            font-size: 1.1em;
+        }
+
+        .nav-tabs {
+            display: flex;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 10px;
+            margin-bottom: 20px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .nav-tab {
+            flex: 1;
+            padding: 15px 20px;
+            text-align: center;
+            cursor: pointer;
+            background: transparent;
+            border: none;
+            font-size: 16px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            color: #666;
+        }
+
+        .nav-tab.active {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+        }
+
+        .nav-tab:hover:not(.active) {
+            background: rgba(102, 126, 234, 0.1);
+        }
+
+        .tab-content {
+            display: none;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(10px);
+        }
+
+        .tab-content.active {
+            display: block;
+            animation: fadeIn 0.5s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .stat-card {
+            background: linear-gradient(135deg, #ff6b6b, #ff8e8e);
+            color: white;
+            padding: 20px;
+            border-radius: 12px;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .stat-card:nth-child(2) {
+            background: linear-gradient(135deg, #4ecdc4, #44a08d);
+        }
+
+        .stat-card:nth-child(3) {
+            background: linear-gradient(135deg, #45b7d1, #96c93d);
+        }
+
+        .stat-card:nth-child(4) {
+            background: linear-gradient(135deg, #f093fb, #f5576c);
+        }
+
+        .stat-number {
+            font-size: 2.5em;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .stat-label {
+            font-size: 0.9em;
+            opacity: 0.9;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: #555;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #e1e8ed;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: border-color 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        .btn {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 12px 25px;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-right: 10px;
+            margin-bottom: 10px;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        .btn-danger {
+            background: linear-gradient(135deg, #ff6b6b, #ff8e8e);
+        }
+
+        .btn-success {
+            background: linear-gradient(135deg, #4ecdc4, #44a08d);
+        }
+
+        .table-container {
+            overflow-x: auto;
+            margin-top: 20px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        th, td {
+            padding: 15px 12px;
+            text-align: left;
+            border-bottom: 1px solid #e1e8ed;
+        }
+
+        th {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            font-weight: 500;
+        }
+
+        tr:hover {
+            background: rgba(102, 126, 234, 0.05);
+        }
+
+        .status {
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 500;
+            text-transform: uppercase;
+        }
+
+        .status-available, .status-tersedia {
+            background: #d4edda;
+            color: #155724;
+        }
+
+        .status-borrowed, .status-dipinjam {
+            background: #fff3cd;
+            color: #856404;
+        }
+
+        .status-maintenance, .status-perbaikan {
+            background: #f8d7da;
+            color: #721c24;
+        }
+
+        .status-active, .status-aktif {
+            background: #cce5ff;
+            color: #004085;
+        }
+        
+        .status-selesai {
+            background: #d4edda;
+            color: #155724;
+        }
+
+        .status-direncanakan, .status-berlangsung, .status-dibatalkan {
+            background: #fff3cd; /* Using a neutral color for other statuses */
+            color: #856404;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(5px);
+        }
+
+        .modal-content {
+            background: white;
+            margin: 5% auto;
+            padding: 30px;
+            border-radius: 15px;
+            width: 90%;
+            max-width: 500px;
+            position: relative;
+            animation: modalSlideIn 0.3s ease-out;
+        }
+
+        @keyframes modalSlideIn {
+            from { transform: translateY(-50px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        .close {
+            position: absolute;
+            right: 20px;
+            top: 15px;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+            color: #aaa;
+        }
+
+        .close:hover {
+            color: #000;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+
+        /* Footer Styles */
+        .footer {
+            background: rgba(44, 62, 80, 0.95);
+            color: white;
+            padding: 40px 0 20px;
+            margin-top: 40px;
+            backdrop-filter: blur(10px);
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+        }
+
+        .footer-section h3 {
+            margin-bottom: 20px;
+            color: #ecf0f1;
+            font-size: 1.2em;
+        }
+
+        .footer-section p,
+        .footer-section li {
+            color: #bdc3c7;
+            line-height: 1.6;
+            margin-bottom: 10px;
+        }
+
+        .footer-section ul {
+            list-style: none;
+            padding: 0; /* Remove default padding for lists */
+        }
+
+        .footer-section a {
+            color: #bdc3c7;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-section a:hover {
+            color: #667eea;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 15px;
+        }
+
+        .social-links a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            border-radius: 50%;
+            color: white;
+            font-size: 18px;
+            transition: transform 0.3s ease;
+        }
+
+        .social-links a:hover {
+            transform: translateY(-3px);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 20px;
+            margin-top: 30px;
+            border-top: 1px solid #34495e;
+            color: #95a5a6;
+        }
+
+        .content-section {
+            display: none;
+        }
+
+        .content-section.active {
+            display: block;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .hamburger {
+                display: flex;
+            }
+
+            .nav-menu {
+                position: fixed;
+                left: -100%;
+                top: 70px; /* Adjust based on navbar height */
+                flex-direction: column;
+                background: rgba(255, 255, 255, 0.95);
+                width: 100%;
+                text-align: center;
+                transition: 0.3s;
+                box-shadow: 0 10px 27px rgba(0, 0, 0, 0.05);
+                backdrop-filter: blur(15px);
+                padding: 20px 0;
+            }
+
+            .nav-menu.active {
+                left: 0;
+            }
+
+            .nav-tabs {
+                flex-direction: column;
+            }
+            
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+            
+            .hero-title {
+                font-size: 2.5em;
+            }
+            
+       .stat-number {
+                font-size: 2em;
+            }
+
+            .hero-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <!-- Logo Section -->
+            <div class="logo">
+                <img src="image/logo-polteksi.png" alt="Politeknik Semen Indonesia" style="height:30px; margin-right:10px;">
+                <span>Sistem Sepeda PSI</span>
+            </div>
+            <!-- Navigation Menu Links -->
+            <ul class="nav-menu">
+                <li><a href="#" onclick="showSection('homepage')" class="nav-link active">🏠 Beranda</a></li>
+                <li><a href="#" onclick="showSection('system')" class="nav-link">⚙️ Sistem</a></li>
+                <li><a href="#" onclick="showSection('about')" class="nav-link">ℹ️ Tentang</a></li>
+                <li><a href="#" onclick="showSection('contact')" class="nav-link">📞 Kontak</a></li>
+            </ul>
+            <!-- Hamburger icon for mobile menu -->
+            <div class="hamburger" onclick="toggleMobileMenu()">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Homepage Section - Active by default -->
+    <div id="homepage" class="content-section active" aria-label="Halaman Beranda Sistem Sepeda">
+        <div class="container">
+            <!-- Hero Section for welcoming users -->
+            <div class="hero-section">
+                <h1 class="hero-title">Sistem Sepeda PSI</h1>
+                <p class="hero-subtitle">
+                    Solusi modern untuk pengelolaan dan peminjaman sepeda di Politeknik Semen Indonesia. 
+                    Mudah, efisien, dan terintegrasi untuk mendukung mobilitas kampus yang berkelanjutan.
+                </p>
+                <div class="hero-buttons">
+                    <button class="hero-btn" onclick="showSection('system')">
+                        🚀 Mulai Sekarang
+                    </button>
+                    <button class="hero-btn secondary" onclick="showSection('about')">
+                        📖 Pelajari Lebih Lanjut
+                    </button>
+                </div>
+            </div>
+
+            <!-- Features Section highlighting key functionalities -->
+            <div class="features-section">
+                <h2 class="features-title">Fitur Unggulan</h2>
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <div class="feature-icon">📊</div>
+                        <h3 class="feature-title">Dashboard Lengkap</h3>
+                        <p class="feature-description">
+                            Pantau semua aktivitas sepeda dalam satu dashboard yang komprehensif dan mudah dipahami.
+                        </p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">🚲</div>
+                        <h3 class="feature-title">Manajemen Sepeda</h3>
+                        <p class="feature-description">
+                            Kelola data sepeda dengan mudah, mulai dari pendaftaran hingga pemeliharaan berkala.
+                        </p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">📝</div>
+                        <h3 class="feature-title">Sistem Peminjaman</h3>
+                        <p class="feature-description">
+                            Proses peminjaman yang efisien dengan tracking otomatis dan reminder pengembalian.
+                        </p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">💰</div>
+                        <h3 class="feature-title">Pengadaan Terintegrasi</h3>
+                        <p class="feature-description">
+                            Kelola pengadaan sepeda baru dengan sistem yang terintegrasi dan transparan.
+                        </p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">📱</div>
+                        <h3 class="feature-title">Responsive Design</h3>
+                        <p class="feature-description">
+                            Antarmuka yang responsif dan ramah pengguna, dapat diakses dari berbagai perangkat.
+                        </p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">🔒</div>
+                        <h3 class="feature-title">Keamanan Data</h3>
+                        <p class="feature-description">
+                            Sistem keamanan yang tangguh untuk melindungi data pengguna dan transaksi.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- About Section - Provides detailed information about the system -->
+    <div id="about" class="content-section" aria-label="Informasi Tentang Sistem Sepeda PSI">
+        <div class="container">
+            <div class="features-section">
+                <h2 class="features-title">Tentang Sistem Sepeda PSI</h2>
+                <div style="text-align: center; max-width: 800px; margin: 0 auto;">
+                    <p style="font-size: 1.1em; line-height: 1.8; color: #666; margin-bottom: 30px;">
+                        Sistem Sepeda PSI adalah platform digital inovatif yang dirancang untuk mengelola dan mengoptimalkan 
+                        pemanfaatan sepeda di lingkungan Politeknik Semen Indonesia. Kami berkomitmen untuk menyediakan solusi 
+                        transportasi kampus yang ramah lingkungan, efisien, dan mudah diakses oleh seluruh civitas akademika. 
+                        Dengan sistem ini, kami berupaya mengurangi jejak karbon, mempromosikan gaya hidup sehat, dan meningkatkan 
+                        mobilitas di dalam kampus.
+                    </p>
+                    <div class="features-grid" style="margin-top: 40px;">
+                        <div class="feature-card">
+                            <div class="feature-icon">🎯</div>
+                            <h3 class="feature-title">Visi</h3>
+                            <p class="feature-description">
+                                Menjadi solusi terdepan dalam pengelolaan transportasi kampus yang berkelanjutan dan efisien, 
+                                mendukung ekosistem kampus yang modern dan peduli lingkungan.
+                            </p>
+                        </div>
+                        <div class="feature-card">
+                            <div class="feature-icon">🚀</div>
+                            <h3 class="feature-title">Misi</h3>
+                            <p class="feature-description">
+                                <ul>
+                                    <li>Memfasilitasi akses mudah dan terorganisir terhadap sarana transportasi sepeda di lingkungan kampus.</li>
+                                    <li>Meningkatkan efisiensi pengelolaan aset sepeda melalui digitalisasi.</li>
+                                    <li>Menyediakan data dan analitik yang akurat untuk pengambilan keputusan terkait pengadaan dan pemeliharaan sepeda.</li>
+                                    <li>Mendorong penggunaan transportasi ramah lingkungan di kalangan mahasiswa dan staf.</li>
+                                </ul>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Contact Section - Provides contact details and a contact form -->
+    <div id="contact" class="content-section" aria-label="Informasi Kontak dan Bantuan">
+        <div class="container">
+            <div class="features-section">
+                <h2 class="features-title">Hubungi Kami</h2>
+                <div style="text-align: center; max-width: 600px; margin: 0 auto;">
+                    <p style="font-size: 1.1em; line-height: 1.8; color: #666; margin-bottom: 40px;">
+                        Punya pertanyaan, masukan, atau butuh bantuan teknis? Tim dukungan kami siap membantu Anda. 
+                        Jangan ragu untuk menghubungi kami melalui informasi di bawah ini atau melalui formulir kontak.
+                    </p>
+                    <div class="features-grid">
+                        <div class="feature-card">
+                            <div class="feature-icon">📍</div>
+                            <h3 class="feature-title">Alamat</h3>
+                            <p class="feature-description">
+                                Komplek Pabrik PT. Semen Indonesia (Persero) Tbk.<br>
+                                Gresik, Jawa Timur, Indonesia
+                            </p>
+                        </div>
+                        <div class="feature-card">
+                            <div class="feature-icon">📞</div>
+                            <h3 class="feature-title">Kontak</h3>
+                            <p class="feature-description">
+                                Telepon: (024) 6925408<br>
+                                Email: info@poltek-esi.ac.id<br>
+                                <strong>Hubungi CP: 123-456-789 (Tim Dukungan Teknis)</strong>
+                            </p>
+                        </div>
+                        <div class="feature-card">
+                            <div class="feature-icon">🕒</div>
+                            <h3 class="feature-title">Jam Operasional</h3>
+                            <p class="feature-description">
+                                Senin - Jumat: 07:00 - 16:00 WIB<br>
+                                Sabtu: 07:00 - 12:00 WIB<br>
+                                Minggu & Hari Libur Nasional: Tutup
+                            </p>
+                        </div>
+                    </div>
+                    <!-- Contact Form Placeholder -->
+                    <div style="margin-top: 40px; text-align: left;">
+                        <h3>Kirim Pesan kepada Kami</h3>
+                        <form style="background: rgba(102, 126, 234, 0.05); padding: 30px; border-radius: 15px;">
+                            <div class="form-group">
+                                <label for="contactName">Nama Lengkap:</label>
+                                <input type="text" id="contactName" name="contactName" placeholder="Masukkan nama Anda" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="contactEmail">Email:</label>
+                                <input type="email" id="contactEmail" name="contactEmail" placeholder="Masukkan email Anda" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="contactSubject">Subjek:</label>
+                                <input type="text" id="contactSubject" name="contactSubject" placeholder="Subjek pesan Anda" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="contactMessage">Pesan Anda:</label>
+                                <textarea id="contactMessage" name="contactMessage" rows="5" placeholder="Tulis pesan Anda di sini..." required></textarea>
+                            </div>
+                            <button type="submit" class="btn">Kirim Pesan</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- System Section - Main application interface -->
+    <div id="system" class="content-section" aria-label="Halaman Sistem dan Pengelolaan Sepeda">
+        <div class="container">
+            <div class="header">
+                <h1>🚲 Sistem Sepeda PSI</h1>
+                <p>Politeknik Semen Indonesia - Sistem Pengadaan dan Peminjaman Sepeda</p>
+                <p style="font-size: 0.9em; color: #888;">Kelola semua aspek terkait sepeda kampus Anda dengan mudah dan efisien.</p>
+            </div>
+
+            <!-- Tab Navigation for System Sub-sections -->
+            <div class="nav-tabs">
+                <button class="nav-tab active" onclick="openTab('dashboard')">Dashboard</button>
+                <button class="nav-tab" onclick="openTab('bikes')">Data Sepeda</button>
+                <button class="nav-tab" onclick="openTab('loans')">Peminjaman</button>
+                <button class="nav-tab" onclick="openTab('procurement')">Pengadaan</button>
+            </div>
+
+            <!-- Dashboard Tab Content -->
+            <div id="dashboard" class="tab-content active">
+                <h2>Dashboard Sistem</h2>
+                <p style="margin-bottom: 25px; color: #555;">Tinjauan cepat status sepeda dan aktivitas peminjaman di Politeknik Semen Indonesia.</p>
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-number" id="totalBikes">0</div>
+                        <div class="stat-label">Total Sepeda</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number" id="availableBikes">0</div>
+                        <div class="stat-label">Sepeda Tersedia</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number" id="borrowedBikes">0</div>
+                        <div class="stat-label">Sedang Dipinjam</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number" id="activeLoans">0</div>
+                        <div class="stat-label">Peminjaman Aktif</div>
+                    </div>
+                </div>
+
+                <h3>Peminjaman Terbaru</h3>
+                <p style="margin-bottom: 15px; color: #666;">Daftar peminjaman yang baru saja dilakukan atau masih dalam status aktif.</p>
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Nama Peminjam</th>
+                                <th>Kode Sepeda</th>
+                                <th>Tanggal Pinjam</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody id="recentLoansTable">
+                            <tr>
+                                <td colspan="4" style="text-align: center; color: #999;">Belum ada data peminjaman</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Bikes Tab Content -->
+            <div id="bikes" class="tab-content">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+                    <h2>Data Sepeda</h2>
+                    <button class="btn" onclick="openModal('addBikeModal')">+ Tambah Sepeda</button>
+                </div>
+                <p style="margin-bottom: 25px; color: #555;">Kelola inventaris sepeda Anda, termasuk penambahan, pengeditan, dan penghapusan data sepeda.</p>
+
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Kode Sepeda</th>
+                                <th>Merek</th>
+                                <th>Model</th>
+                                <th>Tahun</th>
+                                <th>Status</th>
+                                <th>Aksi</th>
+                            </tr>
+                        </thead>
+                        <tbody id="bikesTable">
+                            <tr>
+                                <td colspan="6" style="text-align: center; color: #999;">Belum ada data sepeda</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Loans Tab Content -->
+            <div id="loans" class="tab-content">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+                    <h2>Manajemen Peminjaman</h2>
+                    <button class="btn" onclick="openModal('addLoanModal')">+ Buat Peminjaman Baru</button>
+                </div>
+                <p style="margin-bottom: 25px; color: #555;">Lacak semua transaksi peminjaman sepeda, dari pendaftaran hingga pengembalian, serta kelola riwayat peminjaman.</p>
+
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>ID Peminjaman</th>
+                                <th>Nama Peminjam</th>
+                                <th>Kode Sepeda</th>
+                                <th>Tanggal Pinjam</th>
+                                <th>Tanggal Kembali (Estimasi)</th>
+                                <th>Status Peminjaman</th>
+                                <th>Aksi</th>
+                            </tr>
+                        </thead>
+                        <tbody id="loansTable">
+                            <tr>
+                                <td colspan="7" style="text-align: center; color: #999;">Belum ada data peminjaman</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Procurement Tab Content -->
+            <div id="procurement" class="tab-content">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+                    <h2>Manajemen Pengadaan</h2>
+                    <button class="btn" onclick="openModal('addProcurementModal')">+ Buat Pengadaan Baru</button>
+                </div>
+                <p style="margin-bottom: 25px; color: #555;">Catat dan kelola proses pengadaan sepeda baru, dari perencanaan hingga penerimaan inventaris.</p>
+
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>ID Pengadaan</th>
+                                <th>Jumlah Sepeda</th>
+                                <th>Sumber Dana</th>
+                                <th>Tanggal Pengadaan</th>
+                                <th>Status</th>
+                                <th>Aksi</th>
+                            </tr>
+                        </thead>
+                        <tbody id="procurementTable">
+                            <tr>
+                                <td colspan="6" style="text-align: center; color: #999;">Belum ada data pengadaan</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modals for Add Bike, Add Loan, Add Procurement -->
+
+    <!-- Add Bike Modal -->
+    <div id="addBikeModal" class="modal" aria-modal="true" role="dialog" aria-labelledby="addBikeModalTitle">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('addBikeModal')">&times;</span>
+            <h2 id="addBikeModalTitle" style="margin-bottom: 20px; color: #2c3e50;">Tambah Sepeda Baru</h2>
+            <form>
+                <div class="form-group">
+                    <label for="bikeCode">Kode Sepeda:</label>
+                    <input type="text" id="bikeCode" placeholder="Contoh: SEP-001" required>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="bikeBrand">Merek:</label>
+                        <input type="text" id="bikeBrand" placeholder="Contoh: Polygon" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="bikeModel">Model:</label>
+                        <input type="text" id="bikeModel" placeholder="Contoh: Premier 4" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="bikeYear">Tahun Pembelian:</label>
+                    <input type="number" id="bikeYear" placeholder="Contoh: 2023" min="2000" max="2099" required>
+                </div>
+                <div class="form-group">
+                    <label for="bikeStatus">Status:</label>
+                    <select id="bikeStatus" required>
+                        <option value="tersedia">Tersedia</option>
+                        <option value="dipinjam">Dipinjam</option>
+                        <option value="perbaikan">Perbaikan</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn btn-success">Simpan Sepeda</button>
+                <button type="button" class="btn btn-danger" onclick="closeModal('addBikeModal')">Batal</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Add Loan Modal -->
+    <div id="addLoanModal" class="modal" aria-modal="true" role="dialog" aria-labelledby="addLoanModalTitle">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('addLoanModal')">&times;</span>
+            <h2 id="addLoanModalTitle" style="margin-bottom: 20px; color: #2c3e50;">Buat Peminjaman Baru</h2>
+            <form>
+                <div class="form-group">
+                    <label for="loanBorrowerName">Nama Peminjam:</label>
+                    <input type="text" id="loanBorrowerName" placeholder="Nama Lengkap Peminjam" required>
+                </div>
+                <div class="form-group">
+                    <label for="loanBikeCode">Kode Sepeda:</label>
+                    <input type="text" id="loanBikeCode" placeholder="Kode Sepeda yang dipinjam" required>
+                </div>
+                <div class="form-group">
+                    <label for="loanDate">Tanggal Peminjaman:</label>
+                    <input type="date" id="loanDate" required>
+                </div>
+                <div class="form-group">
+                    <label for="loanReturnDate">Tanggal Pengembalian (Estimasi):</label>
+                    <input type="date" id="loanReturnDate" required>
+                </div>
+                <button type="submit" class="btn btn-success">Mulai Peminjaman</button>
+                <button type="button" class="btn btn-danger" onclick="closeModal('addLoanModal')">Batal</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Add Procurement Modal -->
+    <div id="addProcurementModal" class="modal" aria-modal="true" role="dialog" aria-labelledby="addProcurementModalTitle">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('addProcurementModal')">&times;</span>
+            <h2 id="addProcurementModalTitle" style="margin-bottom: 20px; color: #2c3e50;">Buat Pengadaan Baru</h2>
+            <form>
+                <div class="form-group">
+                    <label for="procurementID">ID Pengadaan:</label>
+                    <input type="text" id="procurementID" placeholder="Contoh: PRD-2024-001" required>
+                </div>
+                <div class="form-group">
+                    <label for="procurementQuantity">Jumlah Sepeda:</label>
+                    <input type="number" id="procurementQuantity" placeholder="Jumlah sepeda yang diadakan" min="1" required>
+                </div>
+                <div class="form-group">
+                    <label for="procurementSource">Sumber Dana:</label>
+                    <input type="text" id="procurementSource" placeholder="Contoh: APBD / Dana Hibah" required>
+                </div>
+                <div class="form-group">
+                    <label for="procurementDate">Tanggal Pengadaan:</label>
+                    <input type="date" id="procurementDate" required>
+                </div>
+                <div class="form-group">
+                    <label for="procurementStatus">Status Pengadaan:</label>
+                    <select id="procurementStatus" required>
+                        <option value="direncanakan">Direncanakan</option>
+                        <option value="berlangsung">Berlangsung</option>
+                        <option value="selesai">Selesai</option>
+                        <option value="dibatalkan">Dibatalkan</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn btn-success">Simpan Pengadaan</button>
+                <button type="button" class="btn btn-danger" onclick="closeModal('addProcurementModal')">Batal</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Footer Section -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section about">
+                <h3>Tentang Sistem</h3>
+                <p>Sistem Sepeda PSI didedikasikan untuk mendukung mobilitas hijau dan efisien di lingkungan Politeknik Semen Indonesia.</p>
+                <div class="social-links">
+                    <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                    <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                    <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                </div>
+            </div>
+            <div class="footer-section links">
+                <h3>Tautan Cepat</h3>
+                <ul>
+                    <li><a href="#" onclick="showSection('homepage')">Beranda</a></li>
+                    <li><a href="#" onclick="showSection('system')">Sistem</a></li>
+                    <li><a href="#" onclick="showSection('about')">Tentang Kami</a></li>
+                    <li><a href="#" onclick="showSection('contact')">Kontak</a></li>
+                </ul>
+            </div>
+            <div class="footer-section contact-info">
+                <h3>Informasi Kontak</h3>
+                <p><i class="fas fa-map-marker-alt"></i> Komplek Pabrik PT. Semen Indonesia (Persero) Tbk. Gresik, Jawa Timur</p>
+                <p><i class="fas fa-phone"></i> (024) 6925408</p>
+                <p><i class="fas fa-envelope"></i> info@poltek-esi.ac.id</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            &copy; 2025-D3 Teknologi Informasi. All Rights Reserved.
+        </div>
+    </footer>
+
+    <!-- Font Awesome for icons -->
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+    <script>
+        // JavaScript for managing section visibility, tab switching, and modals.
+
+        /**
+         * Shows a specific content section and hides others.
+         * Updates the active state of navigation links.
+         * @param {string} sectionId The ID of the section to show.
+         */
+        function showSection(sectionId) {
+            // Hide all content sections
+            const sections = document.querySelectorAll('.content-section');
+            sections.forEach(section => {
+                section.classList.remove('active');
+            });
+            // Show the requested section
+            document.getElementById(sectionId).classList.add('active');
+
+            // Update active state for navigation links
+            const navLinks = document.querySelectorAll('.nav-link');
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+            });
+            document.querySelector(`.nav-link[onclick*="${sectionId}"]`).classList.add('active');
+
+            // Close mobile menu if it's open
+            const navMenu = document.querySelector('.nav-menu');
+            if (navMenu.classList.contains('active')) {
+                navMenu.classList.remove('active');
+                document.querySelector('.hamburger').classList.remove('active');
+            }
+        }
+
+        /**
+         * Opens a specific tab within the system section and hides others.
+         * Updates the active state of tab buttons.
+         * @param {string} tabId The ID of the tab content to show.
+         */
+        function openTab(tabId) {
+            // Hide all tab contents
+            const tabs = document.querySelectorAll('.tab-content');
+            tabs.forEach(tab => {
+                tab.classList.remove('active');
+            });
+            // Show the requested tab content
+            document.getElementById(tabId).classList.add('active');
+
+            // Update active state for tab navigation buttons
+            const navTabs = document.querySelectorAll('.nav-tab');
+            navTabs.forEach(tab => {
+                tab.classList.remove('active');
+            });
+            document.querySelector(`.nav-tab[onclick*="${tabId}"]`).classList.add('active');
+        }
+
+        /**
+         * Displays a modal dialog.
+         * @param {string} modalId The ID of the modal to display.
+         */
+        function openModal(modalId) {
+            document.getElementById(modalId).style.display = 'block';
+        }
+
+        /**
+         * Hides a modal dialog.
+         * @param {string} modalId The ID of the modal to hide.
+         */
+        function closeModal(modalId) {
+            document.getElementById(modalId).style.display = 'none';
+        }
+
+        /**
+         * Toggles the visibility of the mobile navigation menu.
+         */
+        function toggleMobileMenu() {
+            const navMenu = document.querySelector('.nav-menu');
+            navMenu.classList.toggle('active');
+            document.querySelector('.hamburger').classList.toggle('active');
+        }
+
+        // --- Dummy Data (for demonstration purposes only) ---
+        // In a real application, this data would come from a backend database (e.g., Firestore).
+        let bikes = [
+            { code: 'PSI-B001', brand: 'Polygon', model: 'Strattos S2', year: 2022, status: 'tersedia' },
+            { code: 'PSI-B002', brand: 'United', model: 'Detroit 2.0', year: 2021, status: 'dipinjam' },
+            { code: 'PSI-B003', brand: 'Pacific', model: 'Veloce 1.0', year: 2023, status: 'tersedia' },
+            { code: 'PSI-B004', brand: 'Thrill', model: 'Ricochet 3.0', year: 2022, status: 'perbaikan' },
+        ];
+
+        let loans = [
+            { id: 'L001', borrower: 'Andi Nugroho', bikeCode: 'PSI-B002', loanDate: '2025-06-10', returnDate: '2025-06-17', status: 'aktif' },
+            { id: 'L002', borrower: 'Siti Aminah', bikeCode: 'PSI-B001', loanDate: '2025-06-05', returnDate: '2025-06-12', status: 'selesai' },
+            { id: 'L003', borrower: 'Budi Santoso', bikeCode: 'PSI-B003', loanDate: '2025-06-15', returnDate: '2025-06-22', status: 'aktif' },
+        ];
+
+        let procurements = [
+            { id: 'P001', quantity: 5, source: 'APBD', date: '2024-01-15', status: 'selesai' },
+            { id: 'P002', quantity: 3, source: 'Hibah Alumni', date: '2025-03-01', status: 'berlangsung' },
+            { id: 'P003', quantity: 2, source: 'Dana Swadaya', date: '2025-05-20', status: 'direncanakan' },
+        ];
+
+        /**
+         * Renders the bikes data into the bikes table.
+         */
+      function renderBikes() {
+    const tableBody = document.getElementById('bikesTable');
+    tableBody.innerHTML = ''; // Clear existing rows
+    if (bikes.length === 0) {
+        tableBody.innerHTML = '<tr><td colspan="6" style="text-align: center; color: #999;">Belum ada data sepeda</td></tr>';
+        return;
+    }
+    bikes.forEach((bike, index) => {
+        const row = tableBody.insertRow();
+        row.insertCell().textContent = bike.code;
+        row.insertCell().textContent = bike.brand;
+        row.insertCell().textContent = bike.model;
+        row.insertCell().textContent = bike.year;
+        const statusCell = row.insertCell();
+        statusCell.innerHTML = `<span class="status status-${bike.status}">${bike.status.toUpperCase()}</span>`;
+        const actionCell = row.insertCell();
+        actionCell.innerHTML = `
+            <button class="btn" onclick="editBike(${index})" style="padding: 8px 12px; font-size: 14px;">Edit</button>
+            <button class="btn btn-danger" onclick="deleteBike(${index})" style="padding: 8px 12px; font-size: 14px;">Hapus</button>
+        `;
+    });
+}
+
+        /**
+         * Renders the loans data into the loans table.
+         */
+        function renderLoans() {
+            const tableBody = document.getElementById('loansTable');
+            tableBody.innerHTML = ''; // Clear existing rows
+            if (loans.length === 0) {
+                tableBody.innerHTML = '<tr><td colspan="7" style="text-align: center; color: #999;">Belum ada data peminjaman</td></tr>';
+                return;
+            }
+            loans.forEach(loan => {
+                const row = tableBody.insertRow();
+                row.insertCell().textContent = loan.id;
+                row.insertCell().textContent = loan.borrower;
+                row.insertCell().textContent = loan.bikeCode;
+                row.insertCell().textContent = loan.loanDate;
+                row.insertCell().textContent = loan.returnDate;
+                const statusCell = row.insertCell();
+                statusCell.innerHTML = `<span class="status status-${loan.status}">${loan.status.toUpperCase()}</span>`;
+                const actionCell = row.insertCell();
+                actionCell.innerHTML = `
+                    <button class="btn" style="padding: 8px 12px; font-size: 14px;">Detail</button>
+                    <button class="btn btn-success" style="padding: 8px 12px; font-size: 14px;">Kembalikan</button>
+                `;
+            });
+        }
+
+        /**
+         * Renders recent and active loans into the dashboard's recent loans table.
+         */
+        function renderRecentLoans() {
+            const tableBody = document.getElementById('recentLoansTable');
+            tableBody.innerHTML = ''; // Clear existing rows
+            // Filter for active loans or loans made in the last 7 days
+            const activeAndRecentLoans = loans.filter(loan => loan.status === 'aktif' || new Date(loan.loanDate) > new Date(new Date().setDate(new Date().getDate() - 7)));
+            
+            if (activeAndRecentLoans.length === 0) {
+                tableBody.innerHTML = '<tr><td colspan="4" style="text-align: center; color: #999;">Belum ada data peminjaman</td></tr>';
+                return;
+            }
+            // Show up to 5 recent loans
+            activeAndRecentLoans.slice(0, 5).forEach(loan => { 
+                const row = tableBody.insertRow();
+                row.insertCell().textContent = loan.borrower;
+                row.insertCell().textContent = loan.bikeCode;
+                row.insertCell().textContent = loan.loanDate;
+                const statusCell = row.insertCell();
+                statusCell.innerHTML = `<span class="status status-${loan.status}">${loan.status.toUpperCase()}</span>`;
+            });
+        }
+
+        /**
+         * Renders the procurement data into the procurement table.
+         */
+        function renderProcurements() {
+            const tableBody = document.getElementById('procurementTable');
+            tableBody.innerHTML = ''; // Clear existing rows
+            if (procurements.length === 0) {
+                tableBody.innerHTML = '<tr><td colspan="6" style="text-align: center; color: #999;">Belum ada data pengadaan</td></tr>';
+                return;
+            }
+            procurements.forEach(proc => {
+                const row = tableBody.insertRow();
+                row.insertCell().textContent = proc.id;
+                row.insertCell().textContent = proc.quantity;
+                row.insertCell().textContent = proc.source;
+                row.insertCell().textContent = proc.date;
+                const statusCell = row.insertCell();
+                // Replace spaces with hyphens for CSS class consistency
+                statusCell.innerHTML = `<span class="status status-${proc.status.replace(/ /g, '-')}">${proc.status.toUpperCase()}</span>`;
+                const actionCell = row.insertCell();
+                actionCell.innerHTML = `
+                    <button class="btn" style="padding: 8px 12px; font-size: 14px;">Edit</button>
+                    <button class="btn btn-danger" style="padding: 8px 12px; font-size: 14px;">Hapus</button>
+                `;
+            });
+        }
+
+        /**
+         * Updates the statistics displayed in the dashboard.
+         */
+        function updateDashboardStats() {
+            document.getElementById('totalBikes').textContent = bikes.length;
+            document.getElementById('availableBikes').textContent = bikes.filter(bike => bike.status === 'tersedia').length;
+            document.getElementById('borrowedBikes').textContent = bikes.filter(bike => bike.status === 'dipinjam').length;
+            document.getElementById('activeLoans').textContent = loans.filter(loan => loan.status === 'aktif').length;
+        }
+
+        // Initial rendering of data and dashboard stats when the DOM is fully loaded.
+        document.addEventListener('DOMContentLoaded', () => {
+            renderBikes();
+            renderLoans();
+            renderRecentLoans();
+            renderProcurements();
+            updateDashboardStats();
+        });
+    </script> <script>
+function saveData() {
+  localStorage.setItem('loans', JSON.stringify(loans));
+  localStorage.setItem('procurements', JSON.stringify(procurements));
+}
+
+function renderLoans() {
+  const el = document.getElementById('loanTable');
+  el.innerHTML = '';
+  if (loans.length === 0) {
+    el.innerHTML = '<tr><td colspan="6">Belum ada data</td></tr>';
+    return;
+  }
+  loans.forEach((l, i) => {
+    const row = document.createElement('tr');
+    row.innerHTML = `
+      <td>${l.borrower}</td>
+      <td>${l.bikeCode}</td>
+      <td>${l.loanDate}</td>
+      <td>${l.returnDate}</td>
+      <td>${l.status}</td>
+      <td>
+        <button onclick="showLoanDetail(${i})">Detail</button>
+        <button onclick="returnLoan(${i})">Kembalikan</button>
+      </td>`;
+    el.appendChild(row);
+  });
+}
+
+function renderProcurements() {
+  const el = document.getElementById('procurementTable');
+  el.innerHTML = '';
+  if (procurements.length === 0) {
+    el.innerHTML = '<tr><td colspan="6">Belum ada data pengadaan</td></tr>';
+    return;
+  }
+  procurements.forEach((p, i) => {
+    const row = document.createElement('tr');
+    row.innerHTML = `
+      <td>${p.id}</td>
+      <td>${p.quantity}</td>
+      <td>${p.source}</td>
+      <td>${p.date}</td>
+      <td>${p.status}</td>
+      <td><button onclick="deleteProcurement(${i})">Hapus</button></td>`;
+    el.appendChild(row);
+  });
+}
+
+function showLoanDetail(index) {
+  const l = loans[index];
+  alert("Detail Peminjaman:\\n" +
+        "Nama: " + l.borrower + "\\n" +
+        "Kode Sepeda: " + l.bikeCode + "\\n" +
+        "Tanggal Pinjam: " + l.loanDate + "\\n" +
+        "Tanggal Kembali: " + l.returnDate + "\\n" +
+        "Status: " + l.status);
+}
+
+function returnLoan(index) {
+  if (confirm("Yakin sepeda sudah dikembalikan?")) {
+    loans[index].status = "selesai";
+    saveData();
+    renderLoans();
+  }
+}
+
+function deleteProcurement(index) {
+  if (confirm("Hapus data pengadaan ini?")) {
+    procurements.splice(index, 1);
+    saveData();
+    renderProcurements();
+  }
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  renderLoans();
+  renderProcurements();
+});
+
+// Menangani pengiriman formulir untuk menambah sepeda baru
+document.getElementById('addBikeModal').querySelector('form').addEventListener('submit', function(event) {
+    event.preventDefault(); // Mencegah reload halaman
+
+    // Ambil nilai dari input formulir
+    const bikeCode = document.getElementById('bikeCode').value;
+    const bikeBrand = document.getElementById('bikeBrand').value;
+    const bikeModel = document.getElementById('bikeModel').value;
+    const bikeYear = document.getElementById('bikeYear').value;
+    const bikeStatus = document.getElementById('bikeStatus').value;
+
+    const index = this.getAttribute('data-index');
+
+    if (index !== null) {
+        // Mode edit: perbarui data yang ada
+        bikes[index] = {
+            code: bikeCode,
+            brand: bikeBrand,
+            model: bikeModel,
+            year: parseInt(bikeYear),
+            status: bikeStatus
+        };
+    } else {
+        // Mode tambah: tambahkan data baru
+        bikes.push({
+            code: bikeCode,
+            brand: bikeBrand,
+            model: bikeModel,
+            year: parseInt(bikeYear),
+            status: bikeStatus
+        });
+    }
+
+    // Perbarui tabel
+    renderBikes();
+
+    // Tutup modal dan reset form
+    closeModal('addBikeModal');
+    this.removeAttribute('data-index');
+    document.getElementById('addBikeModalTitle').textContent = 'Tambah Sepeda Baru';
+    document.querySelector('#addBikeModal .btn-success').textContent = 'Simpan Sepeda';
+    this.reset();
+});
+
+function editBike(index) {
+    const bike = bikes[index];
+    document.getElementById('bikeCode').value = bike.code;
+    document.getElementById('bikeBrand').value = bike.brand;
+    document.getElementById('bikeModel').value = bike.model;
+    document.getElementById('bikeYear').value = bike.year;
+    document.getElementById('bikeStatus').value = bike.status;
+
+    // Tambahkan atribut data-index ke form untuk melacak indeks yang diedit
+    const form = document.getElementById('addBikeModal').querySelector('form');
+    form.setAttribute('data-index', index);
+
+    // Ubah judul modal dan tombol submit untuk mengindikasikan edit
+    document.getElementById('addBikeModalTitle').textContent = 'Edit Sepeda';
+    document.querySelector('#addBikeModal .btn-success').textContent = 'Simpan Perubahan';
+
+    openModal('addBikeModal');
+}
+
+
+function deleteBike(index) {
+    if (confirm('Yakin ingin menghapus data sepeda ini?')) {
+        bikes.splice(index, 1); // Hapus data dari array berdasarkan indeks
+        renderBikes(); // Perbarui tabel setelah penghapusan
+    }
+}
+</script>
+</body>
+</html>
